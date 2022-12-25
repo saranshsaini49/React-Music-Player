@@ -10,7 +10,7 @@ function App() {
         backgroundImage: "linear-gradient(to right, #000428, #004e92)",
       }}
     >
-      <div className=" w-4/6 p-2">
+      <div className="w-full lg:w-4/6 p-2">
         <PlayerContainer />
       </div>
     </div>
