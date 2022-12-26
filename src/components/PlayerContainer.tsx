@@ -25,7 +25,17 @@ const PlayerContainer = () => {
       setIsPlaying(true);
     }
   };
-
+  useEffect(() => {
+    if (
+      !(endTime.min === 0 && endTime.sec === 0) &&
+      currTime.min === endTime.min &&
+      currTime.sec === endTime.sec
+    ) {
+      console.log("hello");
+      setPlayPause();
+      // setCurrTime({ min: 0, sec: 0 });
+    }
+  }, [currTime]);
   useEffect(() => {
     let durr = duration === null ? 0 : duration;
     const sec = durr / 1000;
@@ -49,6 +59,7 @@ const PlayerContainer = () => {
         });
       }
     }, 1000);
+
     return () => clearInterval(interval);
   }, [sound]);
 
