@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
+import { BsVolumeMuteFill, BsVolumeUpFill } from "react-icons/bs";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import sampleSound from "../assets/sample.mp3";
 import useSound from "use-sound";
 
 const PlayerContainer = () => {
+  const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [play, { pause, duration, sound }] = useSound(sampleSound);
   const [currTime, setCurrTime] = useState({
@@ -23,6 +25,15 @@ const PlayerContainer = () => {
     } else {
       play();
       setIsPlaying(true);
+    }
+  };
+  const setVolume = () => {
+    if (isMuted) {
+      sound.volume(1);
+      setIsMuted(false);
+    } else {
+      sound.volume(0);
+      setIsMuted(true);
     }
   };
   useEffect(() => {
@@ -117,7 +128,7 @@ const PlayerContainer = () => {
         {/* second div ended  */}
       </div>
 
-      <div className="flex justify-center p-4 border border-white">
+      <div className="flex justify-evenly p-4 border border-white">
         <div className="text-3xl flex justify-between w-2/3 text-white">
           <button className="hover:text-green-500" name="prev">
             <BiSkipPrevious />
@@ -137,6 +148,23 @@ const PlayerContainer = () => {
               onClick={() => setPlayPause()}
             >
               <AiFillPlayCircle />
+            </button>
+          )}
+          {isMuted ? (
+            <button
+              className="hover:text-green-500"
+              name="muted"
+              onClick={() => setVolume()}
+            >
+              <BsVolumeMuteFill />
+            </button>
+          ) : (
+            <button
+              className="hover:text-green-500"
+              name="unmuted"
+              onClick={() => setVolume()}
+            >
+              <BsVolumeUpFill />
             </button>
           )}
 
