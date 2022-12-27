@@ -68,7 +68,7 @@ const PlayerContainer = () => {
           min,
           sec,
         });
-        if (min === endTime.min && sec === endTime.sec - 1) {
+        if (min === endTime.min && sec === endTime.sec) {
           setTimeout(() => {
             setIsPlaying(false);
           }, 1000);
@@ -115,10 +115,10 @@ const PlayerContainer = () => {
           </p>
         </div>
         <input
-          className="text-green-500 w-full"
+          className="accent-[#27ae60] w-full"
           type="range"
           min={"0"}
-          max={duration == null ? 0 : duration / 1000}
+          max={duration == null ? 0 : Math.floor(duration / 1000)}
           value={seconds}
           onChange={(e) => {
             sound.seek([e.target.value]);
