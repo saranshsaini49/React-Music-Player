@@ -57,6 +57,11 @@ const PlayerContainer = () => {
           min,
           sec,
         });
+        if (min === endTime.min && sec === endTime.sec - 1) {
+          setTimeout(() => {
+            setIsPlaying(false);
+          }, 1000);
+        }
       }
     }, 1000);
 
