@@ -80,7 +80,7 @@ const PlayerContainer = () => {
   }, [sound]);
 
   return (
-    <>
+    <div className="flex flex-col lg:w-2/3">
       <div
         className="rounded-xl "
         style={{
@@ -173,7 +173,7 @@ const PlayerContainer = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

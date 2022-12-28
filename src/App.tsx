@@ -1,4 +1,5 @@
 import PlayerContainer from "./components/PlayerContainer";
+import SearchForm from "./components/SearchForm";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
         backgroundImage: "linear-gradient(to right, #000428, #004e92)",
       }}
     >
-      <div className="w-full lg:w-4/6 p-2">
+      <div className="flex gap-x-2 p-2">
         <PlayerContainer />
+        <SearchForm />
       </div>
     </div>
   );
