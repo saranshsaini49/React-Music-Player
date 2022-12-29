@@ -8,6 +8,7 @@ const SearchForm = () => {
   const RESPONSE_TYPE = "token";
 
   const [token, setToken] = useState("");
+  const [searchKey, setSearchKey] = useState("");
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -30,6 +31,11 @@ const SearchForm = () => {
     setToken("");
     window.localStorage.removeItem("token");
   };
+
+  const searchData = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(searchKey);
+  };
   return (
     <div className="flex flex-col items-center lg:w-1/3 gap-4 p-2">
       <div>
@@ -49,10 +55,15 @@ const SearchForm = () => {
           </button>
         )}
       </div>
-      <form className="flex flex-col items-center gap-4" action="">
+      <form
+        className="flex flex-col items-center gap-4"
+        onSubmit={(e) => searchData(e)}
+      >
         <input
           className="rounded-sm outline-none p-2"
           type="text"
+          value={searchKey}
+          onChange={(e) => setSearchKey(e.target.value)}
           name=""
           id="search"
           placeholder="Search Song Here...."
