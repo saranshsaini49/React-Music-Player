@@ -1,7 +1,9 @@
+import { useState } from "react";
 import PlayerContainer from "./components/PlayerContainer";
 import SearchForm from "./components/SearchForm";
 
 function App() {
+  const [tracks, setTracks] = useState([]);
   return (
     <div
       className=" w-screen h-screen p-10"
@@ -13,7 +15,7 @@ function App() {
     >
       <div className="flex gap-x-2 p-2">
         <PlayerContainer />
-        <SearchForm />
+        <SearchForm tracks={tracks} setTracks={setTracks} />
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const SearchForm = () => {
+const SearchForm = ({ tracks: [], setTracks }) => {
   const CLIENT_ID = "f6718f16ea50493bb7d6d97db0cdf587";
   const REDIRECT_URI = "http://127.0.0.1:5173/";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -32,9 +33,18 @@ const SearchForm = () => {
     window.localStorage.removeItem("token");
   };
 
-  const searchData = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(searchKey);
+  const searchFunction = async (e: React.FormEvent<HTMLFormElement>) => {
+    const { data } = await axios.get("https://api.spotify.com/v1/search", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        q: searchKey,
+        type: "track",
+      },
+    });
+    setTracks(data.tracks.items);
+    console.log(tracks);
   };
   return (
     <div className="flex flex-col items-center lg:w-1/3 gap-4 p-2">
@@ -47,17 +57,16 @@ const SearchForm = () => {
             Sign-in to Spotify
           </a>
         ) : (
-          <button
-            className="bg-red-500 p-2 rounded-md"
-            onClick={() => logout()}
-          >
-            Log-out Spotify
+          <button onClick={() => logout()}>
+            <a className="bg-red-500 p-2 rounded-md" href="">
+              Log-out Spotify
+            </a>
           </button>
         )}
       </div>
       <form
         className="flex flex-col items-center gap-4"
-        onSubmit={(e) => searchData(e)}
+        onSubmit={(e) => searchFunction(e)}
       >
         <input
           className="rounded-sm outline-none p-2"
@@ -66,12 +75,13 @@ const SearchForm = () => {
           onChange={(e) => setSearchKey(e.target.value)}
           name=""
           id="search"
-          placeholder="Search Song Here...."
+          placeholder="Search Artist Here...."
         />
         <button className="bg-green-500 text-white px-4 py-2 rounded-sm">
           <AiOutlineSearch />
         </button>
       </form>
+      {/* display data div  */}
     </div>
   );
 };
