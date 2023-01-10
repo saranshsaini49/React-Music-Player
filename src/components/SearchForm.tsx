@@ -51,7 +51,6 @@ const SearchForm: React.FC<ISearchFormProps> = (props) => {
       },
     });
     setTracks(data.tracks.items);
-    console.log(tracks);
   };
   return (
     <div className="flex flex-col items-center lg:w-1/3 gap-4 p-2">
@@ -89,7 +88,11 @@ const SearchForm: React.FC<ISearchFormProps> = (props) => {
         </button>
       </form>
       {/* display data div  */}
-      <div className="w-3/4 h-[200px] m-auto overflow-auto border border-black flex flex-col">
+      <div
+        className={`w-3/4 h-[200px] m-auto overflow-auto flex flex-col ${
+          tracks.length > 0 ? "border border-black" : ""
+        }`}
+      >
         {tracks.length > 0 ? (
           tracks.map((item, id) => {
             return (
