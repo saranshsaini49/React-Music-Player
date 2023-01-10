@@ -2,6 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+
 interface ISearchFormProps {
   tracks: any[];
   setTracks: React.Dispatch<React.SetStateAction<never[]>>;
@@ -39,6 +40,7 @@ const SearchForm: React.FC<ISearchFormProps> = (props) => {
   };
 
   const searchFunction = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const { data } = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -87,6 +89,19 @@ const SearchForm: React.FC<ISearchFormProps> = (props) => {
         </button>
       </form>
       {/* display data div  */}
+      <div className="w-3/4 h-[200px] m-auto overflow-auto border border-black flex flex-col">
+        {tracks.length > 0 ? (
+          tracks.map((item, id) => {
+            return (
+              <button className="px-1 py-1 text-white hover:bg-black" key={id}>
+                {item.name}
+              </button>
+            );
+          })
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };
