@@ -1,9 +1,13 @@
 import axios from "axios";
 import * as React from "react";
 import { useEffect, useState } from "react";
-
-
-const SearchForm = ({ tracks: [], setTracks:React.Dispatch<React.SetStateAction<never[]>> }) => {
+import { AiOutlineSearch } from "react-icons/ai";
+interface ISearchFormProps {
+  tracks: any[];
+  setTracks: React.Dispatch<React.SetStateAction<never[]>>;
+}
+const SearchForm: React.FC<ISearchFormProps> = (props) => {
+  const { tracks, setTracks } = props;
   const CLIENT_ID = "f6718f16ea50493bb7d6d97db0cdf587";
   const REDIRECT_URI = "http://127.0.0.1:5173/";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
